@@ -1,20 +1,12 @@
 #!/usr/bin/python3
 import numpy as np
-
-
-def get_value(input):
-    try:
-        return float(input)
-    except:
-        try:
-            return int(input)
-        except:
-            return input
+from common.common import get_value, round_ft_vector
 
 
 def get_input():
-    n = int(input())
-    row = []
+    split_line = input().split()
+    n = get_value(split_line[0])
+    row = [get_value(x) for x in split_line[1:]]
     while len(row) < n:
         for string in input().split():
             row.append(get_value(string))
@@ -26,14 +18,10 @@ def dft(N, x):
     return np.dot(F, x)
 
 
-def round_dft(dft_result, k=2):
-    return [(round(get_value(np.real(value)), k) + round(get_value(np.imag(value)), k) * 1j) for value in dft_result]
-
-
 def main():
     n, x = get_input()
     dft_result = dft(n, x)
-    rounded_dft_result = round_dft(dft_result, k=4)
+    rounded_dft_result = round_ft_vector(dft_result, k=4)
     print(rounded_dft_result)
 
 
