@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import numpy as np
 
 
@@ -14,11 +15,9 @@ def get_value(input):
 def get_input():
     n = int(input())
     row = []
-    i = 0
-    while i < n:
+    while len(row) < n:
         for string in input().split():
             row.append(get_value(string))
-            i += 1
     return n, row[:n]
 
 
@@ -34,7 +33,7 @@ def round_dft(dft_result, k=2):
 def main():
     n, x = get_input()
     dft_result = dft(n, x)
-    rounded_dft_result = round_dft(dft_result)
+    rounded_dft_result = round_dft(dft_result, k=4)
     print(rounded_dft_result)
 
 
