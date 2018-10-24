@@ -1,0 +1,4 @@
+Data in year_data.in shows number of edits of page
+https://pl.wikipedia.org/wiki/Reprezentacja_Polski_w_pi%C5%82ce_no%C5%BCnej_m%C4%99%C5%BCczyzn
+per year (data from page http://vs.aka-online.de/cgi-bin/wppagehiststat.pl).
+Years: 2004 - 2018
