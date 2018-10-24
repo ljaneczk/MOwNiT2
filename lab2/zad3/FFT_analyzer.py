@@ -10,8 +10,8 @@ from zad2.FFT_fast import fft
 def print_fft_plot(n, fft_result):
     f_s = 1
     freqs = fftpack.fftfreq(n) * f_s
-    fig, ax = plt.subplots()
     pos_freqs = [fr for fr in freqs if fr >= 0]
+    fig, ax = plt.subplots()
 
     ax.stem(pos_freqs, np.abs(fft_result[:len(pos_freqs)]))
     ax.set_xlabel('Frequency in edits/year')
@@ -24,7 +24,6 @@ def main():
     n, x = get_fourier_transformation_input()
     fft_result = fft(n, x)
     print_fft_plot(n, fft_result)
-
 
 
 if __name__ == "__main__":
