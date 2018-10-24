@@ -1,17 +1,7 @@
 #!/ust/bin/python3
 import numpy as np
-from common.common import get_value, round_ft_vector, get_next_power_of_two, is_power_of_two
+from common.common import *
 from zad1.DFT_slow import dft
-
-
-def get_input():
-    split_line = input().split()
-    n = get_value(split_line[0])
-    row = [get_value(x) for x in split_line[1:]]
-    while len(row) < n:
-        for string in input().split():
-            row.append(get_value(string))
-    return n, row[:n]
 
 
 def fft(N, x):
@@ -26,9 +16,9 @@ def fft(N, x):
 
 
 def main():
-    n, x = get_input()
+    n, x = get_fourier_transformation_input()
     fft_result = fft(n, x)
-    rounded_fft_result = round_ft_vector(fft_result, k=4)
+    rounded_fft_result = round_ft_vector(fft_result, round_to=4)
     print(rounded_fft_result)
 
 
