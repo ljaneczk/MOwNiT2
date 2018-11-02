@@ -2,12 +2,19 @@ import numpy as np
 import sys
 
 
-def read_matrix_from_input(message="", number_converter=float):
+def read_2d_array_from_input(message="", dtype=float):
     n, m = map(int, input(message).split())
-    a = np.zeros((n, m), dtype=number_converter)
+    a = np.zeros((n, m), dtype=dtype)
     for i in range(n):
-        a[i] = [number_converter(x) for x in input().split()]
+        a[i] = [dtype(x) for x in input().split()]
     return a
+
+
+def get_2d_array(a):
+    if isinstance(a, np.matrix):
+        return a.A
+    else:
+        return a
 
 
 def multiply(a, b, dtype=float):
@@ -15,19 +22,24 @@ def multiply(a, b, dtype=float):
         raise ArithmeticError("Second dimension of first matrix and first dimension of second matrix should be equal.")
     n, k = a.shape
     m = b.shape[1]
+    a1 = get_2d_array(a)
+    b1 = get_2d_array(b)
     c = np.zeros((n, m), dtype=dtype)
     for i in range(n):
         for j in range(m):
             for l in range(k):
-                c[i][j] += a[i][l] * b[l][j]
-    return c
+                c[i][j] += a1[i][l] * b1[l][j]
+    return c if not (isinstance(a, np.matrix) and isinstance(b, np.matrix)) else np.matrix(c)
 
 
 def main():
     try:
-        a = read_matrix_from_input("Give dimensions of first matrix n, m and then n lines with m numbers\n")
-        b = read_matrix_from_input("Give dimensions of second matrix n, m and then n lines with m numbers\n")
-        print(multiply(a, b))
+        a = read_2d_array_from_input("Give dimensions of first matrix n, m and then n lines with m numbers\n")
+        b = read_2d_array_from_input("Give dimensions of second matrix n, m and then n lines with m numbers\n")
+        c = multiply(a, b)
+        print("Result for numpy.ndarray:", c, sep="\n")
+        print("Does multiply return the same for numpy.matrix?", np.allclose(c, multiply(np.matrix(a), np.matrix(b))))
+        print("Is result correct?", np.allclose(c, np.matrix(a) * np.matrix(b)))
     except Exception as exception:
         print(sys.exc_info()[0].__name__ + ":", exception, file=sys.stderr)
 
