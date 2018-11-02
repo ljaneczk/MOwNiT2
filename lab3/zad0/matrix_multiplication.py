@@ -1,8 +1,9 @@
 import numpy as np
 import sys
+from common import get_nd_array
 
 
-def read_2d_array_from_input(message="", dtype=float):
+def read_nd_array_from_input(message="", dtype=float):
     n, m = map(int, input(message).split())
     a = np.zeros((n, m), dtype=dtype)
     for i in range(n):
@@ -10,20 +11,13 @@ def read_2d_array_from_input(message="", dtype=float):
     return a
 
 
-def get_2d_array(a):
-    if isinstance(a, np.matrix):
-        return a.A
-    else:
-        return a
-
-
 def multiply(a, b, dtype=float):
     if a.shape[1] != b.shape[0]:
         raise ArithmeticError("Second dimension of first matrix and first dimension of second matrix should be equal.")
     n, k = a.shape
     m = b.shape[1]
-    a1 = get_2d_array(a)
-    b1 = get_2d_array(b)
+    a1 = get_nd_array(a)
+    b1 = get_nd_array(b)
     c = np.zeros((n, m), dtype=dtype)
     for i in range(n):
         for j in range(m):
@@ -32,10 +26,14 @@ def multiply(a, b, dtype=float):
     return c if not (isinstance(a, np.matrix) and isinstance(b, np.matrix)) else np.matrix(c)
 
 
+def agh_superfast_matrix_multiply(a: np.matrix, b: np.matrix) -> np.matrix:
+    return multiply(a, b)
+
+
 def main():
     try:
-        a = read_2d_array_from_input("Give dimensions of first matrix n, m and then n lines with m numbers\n")
-        b = read_2d_array_from_input("Give dimensions of second matrix n, m and then n lines with m numbers\n")
+        a = read_nd_array_from_input("Give dimensions of first matrix n, m and then n lines with m numbers\n")
+        b = read_nd_array_from_input("Give dimensions of second matrix n, m and then n lines with m numbers\n")
         c = multiply(a, b)
         print("Result for numpy.ndarray:", c, sep="\n")
         print("Does multiply return the same for numpy.matrix?", np.allclose(c, multiply(np.matrix(a), np.matrix(b))))
