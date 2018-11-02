@@ -4,18 +4,18 @@ import sys
 
 def read_matrix_from_input(message="", number_converter=float):
     n, m = map(int, input(message).split())
-    a = np.zeros((n, m))
+    a = np.zeros((n, m), dtype=number_converter)
     for i in range(n):
         a[i] = [number_converter(x) for x in input().split()]
     return a
 
 
-def multiply(a, b):
-    n, k = a.shape
-    if k != b.shape[0]:
+def multiply(a, b, dtype=float):
+    if a.shape[1] != b.shape[0]:
         raise ArithmeticError("Second dimension of first matrix and first dimension of second matrix should be equal.")
+    n, k = a.shape
     m = b.shape[1]
-    c = np.zeros((n, m))
+    c = np.zeros((n, m), dtype=dtype)
     for i in range(n):
         for j in range(m):
             for l in range(k):
