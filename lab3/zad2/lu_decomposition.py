@@ -1,6 +1,9 @@
+#!/usr/bin/python3
 import numpy as np
+import os.path
 import sys
-from common import get_nd_array, read_nd_array_from_input
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))
+from common.common import get_nd_array, read_nd_array_from_input
 
 
 def lu_doolittle_decompose(a, dtype=float):
@@ -28,7 +31,6 @@ def main():
         a = read_nd_array_from_input("Give dimensions of matrix n, m and then n lines with m numbers\n")
         lu = lu_doolittle_decompose(a)
         print("LU decomposition:", "L:", lu[0], "U:", lu[1], sep='\n')
-        from zad0.matrix_multiplication import multiply
         print("Is result correct (A = L * U)?", np.allclose(a, np.matrix(lu[0]) * np.matrix(lu[1])))
     except Exception as exception:
         print(sys.exc_info()[0].__name__ + ":", exception, file=sys.stderr)

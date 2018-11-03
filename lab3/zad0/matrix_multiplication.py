@@ -1,6 +1,9 @@
+#!/usr/bin/python3
 import numpy as np
+import os.path
 import sys
-from common import get_nd_array, read_nd_array_from_input
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))
+from common.common import get_nd_array, read_nd_array_from_input
 
 
 def multiply(a, b, dtype=float):
