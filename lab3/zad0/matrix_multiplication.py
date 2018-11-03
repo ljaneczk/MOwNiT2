@@ -1,14 +1,6 @@
 import numpy as np
 import sys
-from common import get_nd_array
-
-
-def read_nd_array_from_input(message="", dtype=float):
-    n, m = map(int, input(message).split())
-    a = np.zeros((n, m), dtype=dtype)
-    for i in range(n):
-        a[i] = [dtype(x) for x in input().split()]
-    return a
+from common import get_nd_array, read_nd_array_from_input
 
 
 def multiply(a, b, dtype=float):
