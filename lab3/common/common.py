@@ -22,3 +22,7 @@ def read_nd_array_from_input(message="", dtype=float):
     for i in range(n):
         a[i] = [dtype(x) for x in input().split()]
     return a
+
+
+def read_matrix_from_input(message="", dtype=float):
+    return np.matrix(read_nd_array_from_input(message, dtype))
