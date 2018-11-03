@@ -1,0 +1,3 @@
+Matrix is spd.
+
+Why? Because it is symmetric and its eigenvalues 2, 1, 11 are all positive.
