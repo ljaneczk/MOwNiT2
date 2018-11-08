@@ -21,7 +21,7 @@ def is_spd_matrix(a, dtype=float):
     return all([lmbd > 0 for lmbd in w])
 
 
-def agh_superfast_lu(a: np.matrix):
+def agh_superfast_spd_check(a: np.matrix):
     return is_spd_matrix(a)
 
 
