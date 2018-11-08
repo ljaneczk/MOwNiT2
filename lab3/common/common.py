@@ -5,7 +5,8 @@ def get_nd_array(a):
     if isinstance(a, np.matrix):
         return a.A
     else:
-        return a
+        b = np.copy(a)
+        return b
 
 
 def convert_nd_array_to_matrix(a):
