@@ -13,7 +13,6 @@ def gauss_elimination(A, B, dtype=float):
     a = get_nd_array(A)
     b = get_nd_array(B)
     n = a.shape[0]
-    print(n, a, b, sep='\n')
     for k in range(0, n):
         for i in range(k+1, n):
             xmult = a[i][k] / a[k][k]
