@@ -28,7 +28,7 @@ def agh_superfast_lu(a: np.matrix):
 
 def main():
     try:
-        a = read_nd_array_from_input("Give dimensions of matrix n, m and then n lines with m numbers\n")
+        a = read_nd_array_from_input("Give dimensions of matrix n, n and then n lines with n numbers\n")
         lu = lu_doolittle_decompose(a)
         print("LU decomposition:", "L:", lu[0], "U:", lu[1], sep='\n')
         print("Is result correct (A = L * U)?", np.allclose(a, np.matrix(lu[0]) * np.matrix(lu[1])))
