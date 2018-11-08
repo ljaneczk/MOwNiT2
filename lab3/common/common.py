@@ -26,3 +26,17 @@ def read_nd_array_from_input(message="", dtype=float):
 
 def read_matrix_from_input(message="", dtype=float):
     return np.matrix(read_nd_array_from_input(message, dtype))
+
+
+def split_nd_array_into_a_b(A):
+    A = get_nd_array(A)
+    if A.shape[1] == 1:
+        raise Exception("Cannot separate column from n by 1 matrix")
+    n, m = A.shape
+    a = np.ndarray((n, m-1))
+    b = np.ndarray((n, 1))
+    for i in range(n):
+        for j in range(m-1):
+            a[i][j] = A[i][j]
+        b[i] = A[i][m-1]
+    return a, b
