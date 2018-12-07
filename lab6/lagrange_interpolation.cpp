@@ -95,9 +95,8 @@ int main()
 			P = P + L * points[i].se;
 		}
 		real_end = clock();
-		std::cout.precision(8);
+		std::cout.precision(13);
 		std::cout << std::fixed << n << ",lagr," << 1.0 * (real_end - real_begin) / CLOCKS_PER_SEC <<std::endl;
+		std::cout << P <<std::endl;
 	}
-	//std::cout.precision(12);
-	//std::cout << P <<std::endl;
 }

@@ -111,9 +111,8 @@ int main()
 			p = p * poly(1, 1, (-1)*points[k].fi);
 		}
 		real_end = clock();
-		std::cout.precision(8);
+		std::cout.precision(13);
 		std::cout << std::fixed << n << ",newt," << 1.0 * (real_end - real_begin) / CLOCKS_PER_SEC <<std::endl;
+		std::cout << P <<std::endl;
 	}
-	//std::cout.precision(12);
-	//std::cout << P <<std::endl;
 }
