@@ -58,13 +58,20 @@ struct poly {
 			c[i] = this->a[i] + that->a[i];
 		return poly(n1, c);
 	}
-	friend std::ostream & operator <<(std::ostream &out, poly other) {
+	/*friend std::ostream & operator <<(std::ostream &out, poly other) {
 		out << "Poly(" << other.n << ", ";
 		for (int i = other.n; i >= 2; i--)
 			out << other.a[i] << "*x^" << i << " + ";
 		if (other.n > 0)
 			out << other.a[1] << "*x + ";
 		out << other.a[0] << " )";
+		return out;
+	}*/
+	friend std::ostream & operator <<(std::ostream &out, poly other) {
+		out << "Poly([" << other.a[0];
+		for (int i = 1; i <= other.n; i++)
+			out << ", " << other.a[i];
+		out << "])";
 		return out;
 	}
 };
@@ -73,17 +80,24 @@ int main()
 {
 	int n;
 	std::cin >> n;
-	double_pair points[n+1];
+	double_pair points[n+1];  clock_t real_begin, real_end;
 	for (int i = 0; i <= n; i++)
 		std::cin >> points[i].fi >> points[i].se;
-	poly P = poly(n); poly L;
-	for (int i = 0; i <= n; i++) {
-		L = poly(0);
-		L.a[0] = 1;
-		for (int j = 0; j <= n; j++)
-			if (i != j) 
-				L = L * poly(1, 1.0, points[j].fi * (-1)) * (1.0 / (points[i].fi-points[j].fi));
-		P = P + L * points[i].se;
+	for (int it = 0; it < 10; it++) {
+		real_begin = clock();
+		poly P = poly(n); poly L;
+		for (int i = 0; i <= n; i++) {
+			L = poly(0);
+			L.a[0] = 1;
+			for (int j = 0; j <= n; j++)
+				if (i != j) 
+					L = L * poly(1, 1.0, points[j].fi * (-1)) * (1.0 / (points[i].fi-points[j].fi));
+			P = P + L * points[i].se;
+		}
+		real_end = clock();
+		std::cout.precision(8);
+		std::cout << std::fixed << n << ",lagr," << 1.0 * (real_end - real_begin) / CLOCKS_PER_SEC <<std::endl;
 	}
-	std::cout << P <<std::endl;
+	//std::cout.precision(12);
+	//std::cout << P <<std::endl;
 }
