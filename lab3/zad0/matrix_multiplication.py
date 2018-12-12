@@ -28,7 +28,7 @@ def agh_superfast_matrix_multiply(a: np.matrix, b: np.matrix) -> np.matrix:
 def main():
     try:
         a = read_nd_array_from_input("Give dimensions of first matrix n, m and then n lines with m numbers\n")
-        b = read_nd_array_from_input("Give dimensions of second matrix n, m and then n lines with m numbers\n")
+        b = read_nd_array_from_input("Give dimensions of second matrix m, k and then m lines with k numbers\n")
         c = multiply(a, b)
         print("Result for numpy.ndarray:", c, sep="\n")
         print("Does multiply return the same for numpy.matrix?", np.allclose(c, multiply(np.matrix(a), np.matrix(b))))
