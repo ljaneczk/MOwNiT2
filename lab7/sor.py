@@ -2,13 +2,13 @@
 import numpy as np
 from common.common import read_nd_array_from_input, EPS, print_linear_equation
 """ SOR iterative method for a * x = b"""
-""" SOR iterative method is convergent iff p(D^-1*(L+U)) < 1 """
+""" SOR iterative method is convergent iff p(L(omega)) < 1 - https://en.wikipedia.org/wiki/Successive_over-relaxation"""
 
 
 """ 
     A = (L+D) + U
     D[i][j] = 1/A[i][j] if i == j else 0 
-    x(t+1)[i] = 1/A[i][i] * (b[i] - sum(j=1..i-1) { A[i][j] * x(t+1)[j]} - sum(j=i+1..n) { A[i][j] * x(t)[j] }
+    x(t+1)[i] = (1-omega) * x(t)[i] + omega/A[i][i] * (b[i] - sum(j=1..i-1) { A[i][j] * x(t+1)[j]} - sum(j=i+1..n) { A[i][j] * x(t)[j] }
     :return x^T 
 """
 def sor_iterative_solve(A, b):

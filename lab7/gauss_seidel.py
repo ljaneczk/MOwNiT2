@@ -2,7 +2,7 @@
 import numpy as np
 from common.common import read_nd_array_from_input, EPS, print_linear_equation
 """ Gauss-Seidel iterative method for a * x = b"""
-""" Gauss-Seidel iterative method is convergent iff p(D^-1*(L+U)) < 1 """
+""" Gauss-Seidel iterative method is convergent iff p((D+L)^-1*U) < 1 """
 
 
 """ 
