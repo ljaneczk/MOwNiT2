@@ -10,9 +10,8 @@ from common.common import read_nd_array_from_input, EPS, print_linear_equation
     D[i][j] = 1/A[i][j] if i == j else 0 
     x(t+1)[i] = 1/A[i][i] * (b[i] - sum(j=1..i-1) { A[i][j] * x(t+1)[j]} - sum(j=i+1..n) { A[i][j] * x(t)[j] }
     :return x^T 
-    Note that Jacobi iterative method is convergent iff p(D^-1*(L+U)) < 1
 """
-def jacobi_iterative_solve(A, b):
+def gs_iterative_solve(A, b):
     if A.shape[0] != A.shape[1] or A.shape[1] != b.shape[0]:
         raise ArithmeticError("a should be n * n matrix and b should be n * 1 matrix for some n > 0")
     n = A.shape[0]
@@ -33,7 +32,7 @@ def jacobi_iterative_solve(A, b):
 def main():
     A = read_nd_array_from_input("Give dimensions of first matrix n, n and then n lines with n numbers\n")
     b = read_nd_array_from_input("Give dimensions of first matrix n, 1 and then n lines with 1 number\n")
-    x = jacobi_iterative_solve(A, b)
+    x = gs_iterative_solve(A, b)
     print("Problem to solve: A * x = b")
     print_linear_equation(A, b, x="x")
     print("Solution for A * x = b:", x, sep="\n")
